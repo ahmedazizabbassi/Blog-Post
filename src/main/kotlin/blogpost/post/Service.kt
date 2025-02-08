@@ -7,7 +7,6 @@ import jakarta.persistence.EntityNotFoundException
 import org.springframework.context.annotation.ComponentScan
 import java.time.LocalDateTime
 import java.util.*
-import kotlin.time.toDuration
 
 @Service
 @ComponentScan(basePackages = ["blogpost.post.dto"])
@@ -43,7 +42,7 @@ class PostService(private val postRepository: PostRepository) {
     }
 
     private fun Post.toResponse() = PostResponse(
-        id = id!!,
+        id = id,
         title = title,
         content = content,
         author = author,

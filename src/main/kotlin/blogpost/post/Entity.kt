@@ -1,7 +1,6 @@
 package blogpost.post
 
 import jakarta.persistence.*
-import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -13,20 +12,16 @@ import java.util.*
 data class Post(
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    val id: UUID? = null,
+    val id: UUID = UUID.randomUUID(),
 
     @Column(nullable = false)
-    var title: String,
+    var title: String = "",
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    var content: String,
+    var content: String = "",
 
     @Column(nullable = false)
-    var author: String,
+    var author: String = "",
 
     @CreatedDate
     @Column(updatable = false)
@@ -34,13 +29,4 @@ data class Post(
 
     @LastModifiedDate
     var updatedAt: LocalDateTime? = null
-) {
-    constructor() : this(
-        id = null,
-        title = "",
-        content = "",
-        author = "",
-        createdAt = null,
-        updatedAt = null
-    )
-}
+)
